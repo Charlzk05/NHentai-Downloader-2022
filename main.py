@@ -1,7 +1,6 @@
-import os.path
-
 from bs4 import BeautifulSoup
-import requests, json
+from colorama import Fore, Style
+import requests, json, os
 
 class main():
     def download(url:str):
@@ -31,14 +30,26 @@ class main():
                 response = requests.get(link, cookies=cookies, headers=headers)
                 with open(f"./{name[4]}/{name[4]}-{name[5]}", "wb") as file:
                     file.write(response.content)
-                print(f"{name[4]}-{name[5]} - Done!")
+                print(Fore.GREEN + f"{name[4]}-{name[5]} - Done!")
             else:
                 os.mkdir(f"./{name[4]}")
                 with open(f"./{name[4]}/{name[4]}-{name[5]}", "wb") as file:
                     file.write(response.content)
-                print(f"{name[4]}-{name[5]} - Done!")
+                print(Fore.GREEN + f"{name[4]}-{name[5]} - Done!")
 
-        print("operation done!")
+        print(Fore.GREEN + "Operating Done!" + f" Saved on /{name[4]} folder\n")
 
 if __name__ == "__main__":
-    main.download("https://nhentai.net/g/369508/")
+    print("NHentai Downloader By Charlzk")
+    while True:
+        nhentai = input(Style.RESET_ALL + "NHentai Link or ID: ")
+        if "https://nhentai.net/g/" in nhentai:
+            try:
+                main.download(nhentai)
+            except Exception as err:
+                print(Fore.RED + "Error: ", err)
+        else:
+            try:
+                main.download("https://nhentai.net/g/" + nhentai)
+            except Exception as err:
+                print(Fore.RED + "Error: ", err)
