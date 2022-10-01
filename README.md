@@ -1,4 +1,6 @@
 ## NHentai Downloader 2022
+- [Also check out NHentai Scraper](https://github.com/Charlzk05/NHentai-Scraper-2022)
+
 NHentai Downloader that uses requests and cookies to bypass cloudflare
 
 ### Installation
