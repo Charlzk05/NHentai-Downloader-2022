@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-from colorama import Fore, Style
 import requests, json, os
 
 class main():
@@ -14,7 +13,19 @@ class main():
 
         headers = {
             'authority': 'nhentai.net',
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 OPR/90.0.4480.117',
+            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            'accept-language': 'en-US,en;q=0.9',
+            'cache-control': 'max-age=0', 
+            'referer': 'https://nhentai.net/',
+            'sec-ch-ua': '"Chromium";v="106", "Google Chrome";v="106", "Not;A=Brand";v="99"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'document',
+            'sec-fetch-mode': 'navigate',
+            'sec-fetch-site': 'same-origin',
+            'sec-fetch-user': '?1',
+            'upgrade-insecure-requests': '1',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
         }
 
         response = requests.get(url, cookies=cookies, headers=headers)
@@ -30,26 +41,26 @@ class main():
                 response = requests.get(link, cookies=cookies, headers=headers)
                 with open(f"./{name[4]}/{name[4]}-{name[5]}", "wb") as file:
                     file.write(response.content)
-                print(Fore.GREEN + f"{name[4]}-{name[5]} - Done!")
+                print(f"{name[4]}-{name[5]} - Done!")
             else:
                 os.mkdir(f"./{name[4]}")
                 with open(f"./{name[4]}/{name[4]}-{name[5]}", "wb") as file:
                     file.write(response.content)
-                print(Fore.GREEN + f"{name[4]}-{name[5]} - Done!")
+                print(f"{name[4]}-{name[5]} - Done!")
 
-        print(Fore.GREEN + "Operating Done!" + f" Saved on /{name[4]} folder\n")
+        print("Operating Done!" + f" Saved on /{name[4]} folder\n")
 
 if __name__ == "__main__":
-    print("NHentai Downloader By Charlzk")
+    os.system("cls")
     while True:
-        nhentai = input(Style.RESET_ALL + "NHentai Link or ID: ")
+        nhentai = input("NHentai Link or ID: ")
         if "https://nhentai.net/g/" in nhentai:
             try:
                 main.download(nhentai)
             except Exception as err:
-                print(Fore.RED + "Error: ", err)
+                print("Error: ", err)
         else:
             try:
                 main.download("https://nhentai.net/g/" + nhentai)
             except Exception as err:
-                print(Fore.RED + "Error: ", err)
+                print("Error: ", err)
