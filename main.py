@@ -48,7 +48,7 @@ class main():
                     file.write(response.content)
                 print(f"{name[4]}-{name[5]} - Done!")
 
-        print("Operating Done!" + f" Saved on /{name[4]} folder\n")
+        print("Operating Done!" + f" Saved on /{name[4]} folder" + "\n")
 
 if __name__ == "__main__":
     os.system("cls")
@@ -58,9 +58,9 @@ if __name__ == "__main__":
             try:
                 main.download(nhentai)
             except Exception as err:
-                print("Error: ", err)
+                print("\n" + "Error: " + err)
         else:
             try:
                 main.download("https://nhentai.net/g/" + nhentai)
             except Exception as err:
-                print("Error: ", err)
+                print("\n" + "Error: " + err)
